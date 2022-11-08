@@ -1,0 +1,27 @@
+<div>
+  Hello world!
+  Below is the container iframe based:
+
+  <div style="border: 1px solid black;">
+    <luigi-container viewURL="https://fiddle.luigi-project.io/examples/microfrontends/fundamental/table-demo-page.html"
+      defer-init context='{"title": "Team", "content":""}'></luigi-container>
+  </div>
+
+  <br />
+  Below is the container webcomponent based:
+
+  <div style="border: 1px solid black;">
+    <luigi-container viewURL="https://luigiwebcomponents.gitlab.io/luigiwebcomponentmf/main.js" defer-init
+      webcomponent="true" context='{"label": "Calendar"}'></luigi-container>
+  </div>
+
+
+  <br />
+
+  below is the compound container (composed of 2 components):
+  <div style="border: 1px solid black;">
+    <luigi-compound-container-my-name context='{"label": "Dashboard"}' defer-init>
+    </luigi-compound-container-my-name>
+  </div>
+
+</div>
