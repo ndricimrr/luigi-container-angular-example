@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { LuigiContainer, LuigiCompoundContainer } from '@luigi-project/container';
+import { Component, NgZone } from '@angular/core';
+import { LuigiContainer, LuigiCompoundContainer } from '/Users/I529989/Documents/SAP/luigi/luigi/container/public';
 
 
 @Component({
@@ -63,8 +63,8 @@ export class AppComponent {
     ]
   };
 
-  constructor() {
-    customElements.define('luigi-container', LuigiContainer);
+  constructor(private readonly zone: NgZone) {
+    // customElements.define('luigi-container', LuigiContainer);
     customElements.define('luigi-compound-container-my-name', LuigiCompoundContainer);
   }
 
@@ -72,6 +72,23 @@ export class AppComponent {
 
     (document.querySelector('luigi-compound-container-my-name') as any).compoundConfig = this.compoundConfig;
     // this should not be needed but it seems to be so ! Uncommenting the line below the compound container never initializes !
-    (document.querySelector('luigi-compound-container-my-name') as any).init();
+
+
+    // window.addEventListener('foo', () => {
+    try {
+      (document.querySelector('luigi-compound-container-my-name') as any).init()
+    } catch (error) {
+      console.log(error);
+    }
+
+    // })
+
+    setTimeout(() => {
+
+
+    }, 100);
+
+
+
   }
 }
