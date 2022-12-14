@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { LuigiContainer, LuigiCompoundContainer } from '/Users/I529989/Documents/SAP/luigi/luigi/container/public';
+import { LuigiContainer, LuigiCompoundContainer } from '@luigi-project/container';
 
 
 @Component({
@@ -64,7 +64,7 @@ export class AppComponent {
   };
 
   constructor(private readonly zone: NgZone) {
-    // customElements.define('luigi-container', LuigiContainer);
+    customElements.define('luigi-container', LuigiContainer);
     customElements.define('luigi-compound-container-my-name', LuigiCompoundContainer);
   }
 
