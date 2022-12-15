@@ -68,5 +68,16 @@ export class AppComponent {
 
   ngAfterViewInit() {
 
+    (document.querySelector('luigi-compound-container') as any).compoundConfig = this.compoundConfig;
+    // this should not be needed but it seems to be so ! Uncommenting the line below the compound container never initializes !
+
+
+    // // window.addEventListener('foo', () => {
+    try {
+      (document.querySelector('luigi-compound-container') as any).init()
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 }
