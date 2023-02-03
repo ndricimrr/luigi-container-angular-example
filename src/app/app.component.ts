@@ -1,5 +1,7 @@
 import { Component, NgZone } from '@angular/core';
-import '@luigi-project/container';
+import '/Users/I529989/Documents/SAP/23-luigi/container/public';
+import { LuigiContainer } from '/Users/I529989/Documents/SAP/23-luigi/container/public';
+import Events from '/Users/I529989/Documents/SAP/23-luigi/container/public';
 
 
 @Component({
@@ -7,6 +9,7 @@ import '@luigi-project/container';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'angular-lui-component';
   public compoundConfig = {
@@ -66,12 +69,23 @@ export class AppComponent {
   constructor(private readonly zone: NgZone) {
   }
 
+
   ngAfterViewInit() {
 
     (document.querySelector('luigi-compound-container') as any).compoundConfig = this.compoundConfig;
     // this should not be needed but it seems to be so ! Uncommenting the line below the compound container never initializes !
 
+    const container: LuigiContainer | null = document.querySelector('luigi-container');
 
+
+    container?.addEventListener(Events.GET_CONTEXT_REQUEST, event => {
+      const dataToSend = {
+        someDataToSend: 'The year is 2023'
+      }
+      console.log('Data being sent from Core -> MF', dataToSend);
+      (event as any).sendContextToMicrofrontend(dataToSend);
+    });
+    // console.log('test123', container?.viewurl, container?.updateContext({ text: 123 }))
     // // window.addEventListener('foo', () => {
     try {
       (document.querySelector('luigi-compound-container') as any).init()
