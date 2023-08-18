@@ -66,8 +66,7 @@ export class AppComponent {
   };
 
   constructor(private readonly zone: NgZone) {
-    // customElements.define('luigi-container', LuigiContainer);
-    customElements.define('luigi-compound-container-my-name', LuigiCompoundContainer);
+
   }
 
 
@@ -78,7 +77,7 @@ export class AppComponent {
 
     const container: LuigiContainer | null = document.querySelector('luigi-container');
 
-
+    console.log(container)
     container?.addEventListener(Events.GET_CONTEXT_REQUEST, event => {
       const dataToSend = {
         someDataToSend: 'The year is 2023'
@@ -86,20 +85,17 @@ export class AppComponent {
       console.log('Data being sent from Core -> MF', dataToSend);
       (event as any).sendContextToMicrofrontend(dataToSend);
     });
-    // console.log('test123', container?.viewurl, container?.updateContext({ text: 123 }))
-    // // window.addEventListener('foo', () => {
-    try {
-      (document.querySelector('luigi-compound-container') as any).init()
-    } catch (error) {
-      console.log(error);
-    }
 
-    // })
+
+
+    const compoundContainer: LuigiCompoundContainer | null = document.querySelector('luigi-compound-container');
 
     setTimeout(() => {
+      compoundContainer?.init()
 
+      container?.init();
 
-    }, 100);
+    }, 5000);
 
 
 
