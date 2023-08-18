@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import '/Users/I529989/Documents/SAP/sapluigi/container/public';
-import { LuigiCompoundContainer } from '/Users/I529989/Documents/SAP/sapluigi/container/public';
+import { LuigiContainer, LuigiCompoundContainer } from '/Users/I529989/Documents/SAP/sapluigi/container/public';
 
 
 @Component({
@@ -8,6 +7,7 @@ import { LuigiCompoundContainer } from '/Users/I529989/Documents/SAP/sapluigi/co
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'angular-lui-component';
   public compoundConfig = {
@@ -66,20 +66,41 @@ export class AppComponent {
 
   constructor(private readonly zone: NgZone) {
     // customElements.define('luigi-container', LuigiContainer);
-    // customElements.define('luigi-compound-container ', LuigiCompoundContainer);
+    customElements.define('luigi-compound-container-my-name', LuigiCompoundContainer);
   }
+
 
   ngAfterViewInit() {
 
     (document.querySelector('luigi-compound-container') as any).compoundConfig = this.compoundConfig;
     // this should not be needed but it seems to be so ! Uncommenting the line below the compound container never initializes !
 
+    const container: LuigiContainer | null = document.querySelector('luigi-container');
 
-    // window.addEventListener('foo', () => {
+
+    container?.addEventListener(Events.GET_CONTEXT_REQUEST, event => {
+      const dataToSend = {
+        someDataToSend: 'The year is 2023'
+      }
+      console.log('Data being sent from Core -> MF', dataToSend);
+      (event as any).sendContextToMicrofrontend(dataToSend);
+    });
+    // console.log('test123', container?.viewurl, container?.updateContext({ text: 123 }))
+    // // window.addEventListener('foo', () => {
     try {
-      console.log((document.querySelector('luigi-compound-container') as LuigiCompoundContainer).init());
+      (document.querySelector('luigi-compound-container-my-name') as any).init()
     } catch (error) {
       console.log(error);
     }
+
+    // })
+
+    setTimeout(() => {
+
+
+    }, 100);
+
+
+
   }
 }
