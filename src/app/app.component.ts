@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { LuigiContainer, LuigiCompoundContainer } from '/Users/I529989/Documents/SAP/sapluigi/container/public';
+import Events from '/Users/I529989/Documents/SAP/sapluigi/container/public';
 
 
 @Component({
