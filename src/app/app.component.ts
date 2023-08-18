@@ -89,7 +89,7 @@ export class AppComponent {
     // console.log('test123', container?.viewurl, container?.updateContext({ text: 123 }))
     // // window.addEventListener('foo', () => {
     try {
-      (document.querySelector('luigi-compound-container-my-name') as any).init()
+      (document.querySelector('luigi-compound-container') as any).init()
     } catch (error) {
       console.log(error);
     }
